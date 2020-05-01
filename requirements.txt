@@ -1,0 +1,6 @@
+# Program requirements.txt
+numpy==1.17.4
+pathlib==1.0.1
+pillow==6.2.1
+tensorflow==2.0.0
+tensorflow-estimator==2.0.1

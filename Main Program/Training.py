@@ -14,6 +14,7 @@ IMG_WIDTH = 0
 IMG_HEIGHT = 0
 NAME = ""
 
+EPOCHS = 10
 BATCH_SIZE = 100
 train_image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1/255)
 validation_image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
@@ -41,6 +42,22 @@ def read_config(file_name):
         NAME = list[0].split("=")[1]
         IMG_HEIGHT = int(list[1].split("=")[1])
         IMG_WIDTH = IMG_HEIGHT
+        file.close()
+        return True
+    return False
+
+
+def save_config(file_name):
+    global IMG_WIDTH
+    global IMG_HEIGHT
+    global NAME
+    if ".cfg" not in file_name.lower():
+        file_name = file_name + ".cfg"
+
+    if not os.path.exists(file_name):
+        file = open(file_name, "w")
+        file.write("NAME=" + str(NAME) + "\nSIZE=" + str(IMG_HEIGHT))
+        file.close()
         return True
     return False
 
@@ -110,6 +127,7 @@ def train():
     loaded = read_config(save_name)
 
     if not loaded:
+        NAME = save_name
         IMG_HEIGHT = get_meta.get_img_meta(path_list, CLASS_NAMES)
         IMG_WIDTH = IMG_HEIGHT
 
@@ -138,8 +156,10 @@ def train():
                   loss='binary_crossentropy',
                   metrics=['accuracy'])
 
-    model.fit_generator(train_ds, steps_per_epoch=BATCH_SIZE, epochs=1)
+    model.fit_generator(train_ds, steps_per_epoch=BATCH_SIZE, epochs=EPOCHS)
     model.save_weights('./checkpoints/' + NAME + "/model")
+
+    save_config(save_name)
 
 
 train()
