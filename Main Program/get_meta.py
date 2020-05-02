@@ -2,10 +2,12 @@ import os
 from PIL import Image
 
 
-def get_img_meta(path_list, CLASS_NAMES):
+def get_img_meta(path_base):
     count = 0
     size = 0
     big = ""
+    path_list = [path_base + "/training", path_base + "/testing", path_base + "/validation"]
+    CLASS_NAMES = os.listdir(path_list[0])
 
     for p in path_list:
         for c in CLASS_NAMES:
