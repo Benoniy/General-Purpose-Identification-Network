@@ -48,5 +48,6 @@ def main():
         test_model.run(NAME, SIZE, BATCH_SIZE, data_path, False, True)
 
 
-test_model.run("cell_images", 394, 50, "./dataset", False, True)
+# test_model.run("cell_images", 394, 50, "./dataset", False, True)
+main()
 input("Press enter to exit!")

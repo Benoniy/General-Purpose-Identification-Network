@@ -24,7 +24,7 @@ def run(name, size, batch_size, data_path, validation, random):
         keras.layers.MaxPooling2D(),
         keras.layers.Flatten(),
         keras.layers.Dense(512, activation='relu'),
-        keras.layers.Dense(2, activation='sigmoid')
+        keras.layers.Dense(len(class_names), activation='sigmoid')
     ])
 
     if os.path.exists('./checkpoints/' + name + "/model.index"):
