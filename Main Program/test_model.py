@@ -49,8 +49,9 @@ def run(name, size, batch_size, data_path, validation, random):
             high = 0
             predLB = ""
             count = 0
-
+            confid = ""
             for c in x:
+
                 if c > high:
                     high = c
                     predLB = str(class_names[count])
@@ -85,7 +86,16 @@ def run(name, size, batch_size, data_path, validation, random):
         tf_model_predictions = model.predict(test_image_batch)
         print("Prediction results shape:", tf_model_predictions.shape, "\n")
 
-        print("%2s      %10s    %10s" % ("#", "Predicted", "Actual"))
+        stringFormat = "%3s   "
+        titleConfidence = 0
+        titleConfidenceText = ""
+        for c in class_names:
+            titleConfidence += 10
+            titleConfidenceText += str(c) + "  "
+
+        stringFormat += "%" + str(titleConfidence) + "s    %10s    %10s"
+
+        print(stringFormat % ("#", titleConfidenceText, "Predicted", "Actual"))
         i = 0
         correct = 0
         total = 0
@@ -95,8 +105,10 @@ def run(name, size, batch_size, data_path, validation, random):
             predLB = ""
             high = 0
             count = 0
+            confid = []
 
             for c in x:
+                confid.append(c)
                 if c > high:
                     high = c
                     predLB = str(class_names[count])
@@ -106,7 +118,16 @@ def run(name, size, batch_size, data_path, validation, random):
                 correct += 1
             total += 1
 
-            print("%2i    %12s  %12s" % (i+1, predLB, trueLB))
+            stringFormat = "%3i"
+            a = 0
+            confidOut = "  "
+            for c in confid:
+                a += 11
+                confidOut += "%2.6f    " % c
+
+            stringFormat += "    %" + str(a) + "s" + "%12s  %12s"
+
+            print(stringFormat % (i+1, confidOut, predLB, trueLB))
             i += 1
 
         print("correct: " + str(correct))

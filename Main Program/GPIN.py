@@ -1,5 +1,7 @@
 import wx
 import os
+import test_model
+import train_model
 
 NAME = ""
 SIZE = 0
