@@ -53,6 +53,7 @@ def read_config(file_name):
     return False
 
 
+
 # Creates a save file
 def save_config(file_name):
     global IMG_WIDTH
