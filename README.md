@@ -41,19 +41,7 @@ then i would separate into apples and orange. After this you have to seperate ea
 
 going with the example from earlier you should organise your folder structure like this:  
 
-    dataset
-    
-        Training
-            Apples
-            Oranges
-            
-        Testing
-            Apples
-            Oranges
-            
-        Validation
-            Apples
-            Oranges
+![File Structure](https://github.com/Benoniy/General-Purpose-Identification-Network/blob/master/Images/file%20structure.PNG)
 
 #### How to run the Training program: 
 Running the training program is as simple as running the python file Training.py however before you do  
