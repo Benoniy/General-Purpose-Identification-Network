@@ -1,33 +1,42 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-
+''' These are neural network packages '''
 import tensorflow as tf
 from tensorflow import keras
+
+''' These are for navigating directories '''
 import os
 import pathlib
+
+''' This for save file generation '''
 import get_meta
 
-
-# Constant variables
-AUTOTUNE = tf.data.experimental.AUTOTUNE
+''' NAME dictates the save name, IMG_WIDTH and IMG_HEIGHT dictate the shape of the input layer of the Network '''
+NAME = ""
 IMG_WIDTH = 0
 IMG_HEIGHT = 0
-NAME = ""
 
+''' AUTOTUNE is required, EPOCH is the amount of training sessions performed, BATCH_SIZE is the amount of images per 
+training session. '''
+AUTOTUNE = tf.data.experimental.AUTOTUNE
 EPOCHS = 10
 BATCH_SIZE = 100
-train_image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1/255)
-validation_image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
+
+''' This is for converting the standard 0-255 value of a pixel into a floating point with a value of 0.0-1.0 '''
+train_image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1 / 255)
+validation_image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1 / 255)
+
+''' Paths '''
 training_path = pathlib.Path("./dataset/Training")
 testing_path = pathlib.Path("./dataset/Testing")
 validation_path = pathlib.Path("./dataset/Validation")
 path_list = [training_path, testing_path, validation_path]
+
+''' Gets the amount of different possible outputs so that the neural network can have an output layer of the correct 
+size. '''
 CLASS_NAMES = os.listdir(training_path)
-test_count = 1
-TRN_IMAGES = []
-TRN_LABELS = []
 
-
+# Reads a save file
 def read_config(file_name):
     global IMG_WIDTH
     global IMG_HEIGHT
@@ -47,6 +56,7 @@ def read_config(file_name):
     return False
 
 
+# Creates a save file
 def save_config(file_name):
     global IMG_WIDTH
     global IMG_HEIGHT
@@ -69,10 +79,7 @@ def get_label(file_path):
 
 # This decodes each image into a tf.image object and performs pre-processing
 def decode_img(img, file_path):
-
     img = tf.image.decode_png(img, channels=1)
-
-
     img = tf.image.convert_image_dtype(img, tf.float32)
     return tf.image.resize(img, [IMG_WIDTH, IMG_HEIGHT])
 
@@ -87,16 +94,7 @@ def process_path(file_path):
 # This controls the creation of the dataset
 def getDataSet():
     train_list = tf.data.Dataset.list_files(str(training_path / '*/*'))
-
     labeled_ds = train_list.map(process_path, num_parallel_calls=AUTOTUNE)
-
-
-    '''
-    for i, l in labeled_ds:
-        print(i)
-        keras.preprocessing.image.save_img("p.png", i.numpy())
-        break
-    '''
     return labeled_ds
 
 
@@ -133,11 +131,12 @@ def train():
 
     dataset = getDataSet()
     train_ds = prepare_for_training(dataset)
-    train_image_batch, train_label_batch = next(iter(train_ds))
+    train_image_batch, train_label_batch = next(iter(train_ds))  # Depreciated
 
-    # Simple sequential
+    # Simple sequential Neural network
     model = keras.Sequential([
-        keras.layers.Conv2D(16, (3, 3), strides=(2, 2), padding='same', activation='relu', input_shape=(IMG_WIDTH, IMG_HEIGHT, 1)),
+        keras.layers.Conv2D(16, (3, 3), strides=(2, 2), padding='same', activation='relu',
+                            input_shape=(IMG_WIDTH, IMG_HEIGHT, 1)),
         keras.layers.MaxPooling2D(),
         keras.layers.Conv2D(32, (3, 3), strides=(2, 2), padding='same', activation='relu'),
         keras.layers.MaxPooling2D(),
