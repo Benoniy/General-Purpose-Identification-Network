@@ -3,12 +3,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 ''' These are neural network packages '''
 import tensorflow as tf
 from tensorflow import keras
-
-''' These are for navigating directories '''
 import os
 import pathlib
-
-''' This for save file generation '''
 import get_meta
 
 ''' NAME dictates the save name, IMG_WIDTH and IMG_HEIGHT dictate the shape of the input layer of the Network '''
@@ -35,6 +31,7 @@ path_list = [training_path, testing_path, validation_path]
 ''' Gets the amount of different possible outputs so that the neural network can have an output layer of the correct 
 size. '''
 CLASS_NAMES = os.listdir(training_path)
+
 
 # Reads a save file
 def read_config(file_name):
