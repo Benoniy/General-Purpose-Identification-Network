@@ -1,7 +1,6 @@
 import os
 import pathlib
-import get_meta
-import train_model
+import test_model
 
 NAME = ""
 SIZE = 0
@@ -37,24 +36,6 @@ def read_config(file_name):
     return False
 
 
-# Creates a save file
-def save_config(file_name):
-    global NAME, SIZE, EPOCHS, BATCH_SIZE, data_path
-    if ".cfg" not in file_name.lower():
-        file_name = file_name + ".cfg"
-
-    if not os.path.exists(file_name):
-        file = open(file_name, "w")
-        file.write("NAME=" + str(NAME) +
-                   "\nSIZE=" + str(SIZE) +
-                   "\nEPOCHS=" + str(EPOCHS) +
-                   "\nBATCH=" + str(BATCH_SIZE) +
-                   "\nPATH=" + str(data_path))
-        file.close()
-        return True
-    return False
-
-
 def main():
     global NAME, SIZE, EPOCHS, BATCH_SIZE, data_path
 
@@ -62,15 +43,10 @@ def main():
     loaded = read_config(save_name)
 
     if not loaded:
-        NAME = save_name
-        data_path = pathlib.Path(input("Enter the path of the dataset:\n"))
-        SIZE = get_meta.get_img_meta(data_path)
-        EPOCHS = input("Enter amount of EPOCHS:\n")
-        BATCH_SIZE = input("Enter the BATCH SIZE:\n")
-
-    train_model.run(NAME, SIZE, EPOCHS, BATCH_SIZE, data_path)
-    save_config(save_name)
+        print("Testing requires a trained file and therefore a .cfg file!")
+    else:
+        test_model.run(NAME, SIZE, BATCH_SIZE, data_path, False, True)
 
 
-main()
+test_model.run("cell_images", 394, 50, "./dataset", False, True)
 input("Press enter to exit!")
