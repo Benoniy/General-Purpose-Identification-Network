@@ -1,3 +1,7 @@
+# Declaration:  
+Any commit made by the account br17011 should be attributed to the user Benoniy as this is an alternate  
+account that was unintentionally used when initially uploading project files.
+
 # Readme:
 #### Introduction:
 This is the readme for GPIN a simple neural network that I designed to be able to recognise images,  
