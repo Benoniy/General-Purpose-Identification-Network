@@ -8,7 +8,7 @@ test_image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1
 train_image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1/255)
 
 
-def run(name, size, batch_size, data_path, validation, random):
+def run(name, size, batch_size, data_path, validation, specific):
     training_path = pathlib.Path(data_path + "/training")
     testing_path = pathlib.Path(data_path + "/testing")
     validation_path = pathlib.Path(data_path + "/validation")
@@ -34,9 +34,9 @@ def run(name, size, batch_size, data_path, validation, random):
         print("Model doesnt exist")
         exit(0)
 
-    if not random:
+    if specific is not None:
 
-        file = input("Enter the path of the image:\n")
+        file = specific
         img = keras.preprocessing.image.load_img(file, target_size=(size, size), color_mode='grayscale')
         img = keras.preprocessing.image.img_to_array(img)
         img = np.expand_dims(img, axis=0)

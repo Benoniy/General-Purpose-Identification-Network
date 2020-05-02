@@ -40,11 +40,24 @@ def main():
 
     save_name = input("Please Enter a Save name: \n")
     loaded = read_config(save_name)
+    val = False
+    path = None
 
     if not loaded:
         print("Testing requires a trained file and therefore a .cfg file!")
     else:
-        test_model.run(NAME, SIZE, BATCH_SIZE, data_path, False, True)
+        option_one = input("Do you want to: \n1)Test a set of random images \n2)Test a specific image\n")
+        if "2" in option_one:
+            path = input("Please enter the path of the image you want to test:\n")
+        else:
+            path = None
+            val = input("Do you want to use the validation set (y/n):\n")
+            if "y" in val.lower():
+                val = True
+            else:
+                val = False
+
+        test_model.run(NAME, SIZE, BATCH_SIZE, data_path, val, path)
 
 
 # test_model.run("cell_images", 394, 50, "./dataset", False, True)
