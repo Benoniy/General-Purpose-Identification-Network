@@ -1,4 +1,5 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
+import os
 
 import tensorflow as tf
 from tensorflow import keras
@@ -73,7 +74,8 @@ def train():
 
     if SETUP:
         dataset = getDataSet()
-        train_ds = prepare_for_training(dataset)
+        file_count = sum(len(files) for _, _, files in os.walk(rf"{training_path}"))
+        train_ds = prepare_for_training(dataset, shuffle_buffer_size=file_count)
         train_image_batch, train_label_batch = next(iter(train_ds))  # Depreciated
 
         # Simple sequential Neural network
