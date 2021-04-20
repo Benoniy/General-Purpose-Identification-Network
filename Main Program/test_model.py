@@ -4,8 +4,8 @@ import os
 import pathlib
 import numpy as np
 
-test_image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
-train_image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1/255)
+test_image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1.0/255)
+train_image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1.0/255)
 
 
 def run(name, size, batch_size, data_path, validation, specific):
@@ -24,7 +24,7 @@ def run(name, size, batch_size, data_path, validation, specific):
         keras.layers.MaxPooling2D(),
         keras.layers.Flatten(),
         keras.layers.Dense(512, activation='relu'),
-        keras.layers.Dense(len(class_names), activation='sigmoid')
+        keras.layers.Dense(len(class_names), activation='softmax')
     ])
 
     if os.path.exists('./checkpoints/' + name + "/model.index"):

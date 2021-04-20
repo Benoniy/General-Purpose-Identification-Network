@@ -87,7 +87,7 @@ def train():
             keras.layers.MaxPooling2D(),
             keras.layers.Flatten(),
             keras.layers.Dense(512, activation='relu'),
-            keras.layers.Dense(len(CLASS_NAMES), activation='sigmoid')
+            keras.layers.Dense(len(CLASS_NAMES), activation='softmax')
         ])
 
         if os.path.exists('./checkpoints/' + NAME + "/model.index"):

@@ -5,3 +5,4 @@ pathlib==1.0.1
 pillow==6.2.2
 tensorflow==2.0.1
 tensorflow-estimator==2.0.1
+SciPy
