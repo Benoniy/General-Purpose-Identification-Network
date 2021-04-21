@@ -41,6 +41,7 @@ def main():
     save_name = input("Please Enter a Save name: \n")
     loaded = read_config(save_name)
     val = False
+    single = False
     path = None
 
     if not loaded:
@@ -49,6 +50,7 @@ def main():
         option_one = input("Do you want to: \n1)Test a set of random images \n2)Test a specific image\n")
         if "2" in option_one:
             path = input("Please enter the path of the image you want to test:\n")
+            single = True
         else:
             path = None
             val = input("Do you want to use the validation set (y/n):\n")
@@ -57,7 +59,7 @@ def main():
             else:
                 val = False
 
-        test_model.run(NAME, SIZE, BATCH_SIZE, data_path, val, path)
+        test_model.run(NAME, SIZE, BATCH_SIZE, data_path, val, path, single)
 
 
 # test_model.run("cell_images", 394, 50, "./dataset", False, True)
