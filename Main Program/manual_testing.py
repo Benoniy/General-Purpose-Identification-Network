@@ -8,8 +8,8 @@ BATCH_SIZE = 100
 data_path = ""
 
 
-# Reads a save file
 def read_config(file_name):
+    """ Reads a save file which references a model """
     global NAME, SIZE, EPOCHS, BATCH_SIZE, data_path
     if ".cfg" not in file_name.lower():
         file_name = file_name + ".cfg"
@@ -62,6 +62,7 @@ def main():
         test_model.run(NAME, SIZE, BATCH_SIZE, data_path, val, path, single)
 
 
-# test_model.run("cell_images", 394, 50, "./dataset", False, True)
-main()
-input("Press enter to exit!")
+if __name__ == "__main__":
+    # test_model.run("cell_images", 394, 50, "./dataset", False, True)
+    main()
+    input("Press enter to exit!")

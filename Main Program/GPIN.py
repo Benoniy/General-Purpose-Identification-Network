@@ -11,6 +11,7 @@ data_path = ""
 
 
 class WindowClass(wx.Frame):
+    """ This was a start to my GUI """
     def __init__(self, *args, **kwargs):
         super(WindowClass, self).__init__(*args, **kwargs)
         self.create_gui()

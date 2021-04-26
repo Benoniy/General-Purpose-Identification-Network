@@ -10,6 +10,9 @@ train_image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=
 
 
 def run(name, size, batch_size, data_path, validation, specific_path, single):
+    shutil.rmtree(".\\cache")
+    os.mkdir(".\\cache")
+
     training_path = pathlib.Path(data_path + "/training")
     testing_path = pathlib.Path(data_path + "/testing")
     validation_path = pathlib.Path(data_path + "/validation")

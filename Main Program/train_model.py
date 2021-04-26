@@ -29,8 +29,8 @@ def get_label(file_path):
     return pt[-2] == CLASS_NAMES
 
 
-# This decodes each image into a tf.image object and performs pre-processing
 def decode_img(img, file_path):
+    """ This decodes each image into a tf.image object and performs pre-processing """
     img = tf.image.decode_png(img, channels=1)
     img = tf.image.convert_image_dtype(img, tf.float32)
     return tf.image.resize(img, [SIZE, SIZE])
@@ -43,8 +43,8 @@ def process_path(file_path):
     return img, label
 
 
-# This controls the creation of the dataset
 def getDataSet():
+    """ This controls the creation of the dataset """
     train_list = tf.data.Dataset.list_files(str(training_path / '*/*'))
     labeled_ds = train_list.map(process_path, num_parallel_calls=AUTOTUNE)
     return labeled_ds
