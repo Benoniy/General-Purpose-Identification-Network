@@ -80,9 +80,6 @@ def run(name, size, batch_size, data_path, validation, specific_path, single):
         titleConfidence += 10
         titleConfidenceText += str(c) + "  "
 
-
-
-
     if single:
         stringFormat += "%" + str(titleConfidence) + "s    %10s"
         print(stringFormat % ("#", titleConfidenceText, "Predicted"))
