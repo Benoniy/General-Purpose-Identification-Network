@@ -2,8 +2,8 @@ import os
 from model import Model
 
 
-# Creates a save file
 def save_config(file_name, model):
+    """ Creates a save file that can be used to access the model again """
     if ".cfg" not in file_name.lower():
         file_name = file_name + ".cfg"
 

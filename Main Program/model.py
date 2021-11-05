@@ -1,6 +1,7 @@
 
 
 class Model:
+    """ Stores all of the information about a loaded model """
     def __init__(self, name, size, epochs, batch_size, data_path):
         self.NAME = name
         self.SIZE = size
