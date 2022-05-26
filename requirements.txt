@@ -3,6 +3,6 @@ wxpython
 numpy==1.17.4
 pathlib==1.0.1
 Pillow==8.1.1
-tensorflow==2.4.0
+tensorflow==2.7.2
 tensorflow-estimator==2.0.1
 SciPy
